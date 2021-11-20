@@ -62,7 +62,6 @@ def is_bitlink(url, token):
 
 
 def main():
-    # user_url = input('Введите ссылку: ')
     parser = argparse.ArgumentParser()
     parser.add_argument('user_url')
     args = parser.parse_args()
