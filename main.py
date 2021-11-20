@@ -4,10 +4,6 @@ from urllib.parse import urlparse
 import argparse
 from dotenv import load_dotenv
 
-load_dotenv()
-
-BITLY_TOKEN = os.getenv('TOKEN')
-
 
 def shorten_link(token, long_url):
     url = 'https://api-ssl.bitly.com/v4/bitlinks'
@@ -64,16 +60,19 @@ def is_bitlink(url, token):
 
 
 def main():
+    load_dotenv()
+    bitly_token = os.getenv('TOKEN')
+    
     parser = argparse.ArgumentParser()
     parser.add_argument('user_url')
     args = parser.parse_args()
     user_url = args.user_url
 
-    if is_bitlink(user_url, BITLY_TOKEN):
-        print(count_clicks(BITLY_TOKEN, user_url))
+    if is_bitlink(user_url, bitly_token):
+        print(count_clicks(bitly_token, user_url))
     else:
         try:
-            bitlink = shorten_link(BITLY_TOKEN, user_url)
+            bitlink = shorten_link(bitly_token, user_url)
             print('Битлинк', bitlink)
         except requests.exceptions.HTTPError:
             print('Ошибка запроса!')
