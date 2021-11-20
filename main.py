@@ -1,5 +1,4 @@
 import os
-from urllib import parse
 import requests
 from urllib.parse import urlparse
 import argparse
